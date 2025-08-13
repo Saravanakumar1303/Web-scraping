@@ -1,0 +1,22 @@
+{% extends 'dashboard.html' %}
+{% block content %}
+<div class="register_main">
+    <h2>Login</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <label>Username :</label>
+        <input type="text" id="username" name="username" placeholder="email"><br>
+        <label>Password :</label>
+        <input type="text" id="pasword" name="password" placeholder="password"><br>
+        <input type="submit" value="Login">
+    </form>
+    <!-- <button><a href="{% url 'register' %}">Register</a></button> -->
+
+</div>
+<script>
+    if("{{messages}}")
+    {
+        alert("{{messages}}")
+    }
+</script>
+{% endblock %}

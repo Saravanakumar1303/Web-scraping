@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>View Subscription</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>User :</th>
+                <th>Subscription :</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for sub in subscription_table %}
+           <tr>
+            <td>{{sub.user__first_name}}</td>
+            <td>{{sub.subscription}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <h2>user Subscription</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <label for="">Username :</label>
+        <input type="text" name="user" id="user" value="{{request.user.email}}"><br>
+        <label for="">Subscription :</label>
+        <select name="subscription" id="subscription">
+            {% for key,value in choices %}
+            <option value="{{key}}">{{value}}</option>
+            {% endfor %}
+        </select><br>
+        <input type="submit" value="Create Subscription">
+    </form>
+</body>
+</html>

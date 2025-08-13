@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            margin: 0;
+        }
+        .nav-bar{
+            display: flex;
+            padding: 20px;
+            background-color: burlywood;
+        }
+        .nav-bar div{
+            padding:  13px 13px;
+            background-color: antiquewhite;
+            margin: 0 18px;
+            border-radius: 9px;
+            box-shadow: 2px 2px 3px saddlebrown;
+        }
+        .nav-bar div:hover{
+            background-color: white;
+        }
+        .nav-bar .empty-nav{
+            padding: 0;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <div class="nav-bar">
+            <div><a href="/">Home</a></div>
+            {% if user.is_authenticated %}
+                <div><a href="{% url 'subs' %}">Subscription</a></div>
+                <div><a href="">View Subscription</a></div>
+                <div><a href="{% url 'job' %}">Job</a></div>
+                <div><a href="{% url 'links' %}">Links</a></div>
+                <div class="empty-nav"></div>
+                <p>{{request.user.email}}</p>
+                <div><a href="{% url 'logout' %}">Logout</a></div>
+            {% else %}
+                <div><a href="{% url 'register' %}">Register</a></div>
+                <div><a href="{% url 'login' %}">Login</a></div>
+            {% endif %}
+        </div>
+    </header>
+    <section>
+        {% block content %}
+        {% endblock %}
+    </section>

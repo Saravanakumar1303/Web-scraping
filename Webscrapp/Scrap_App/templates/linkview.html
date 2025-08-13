@@ -1,0 +1,31 @@
+{% extends 'dashboard.html' %}
+{% block content %}
+<style>
+table,th,td{
+            border: 2px solid black;
+            border-collapse: collapse;
+        }
+    th,td{
+            padding: 3px;
+        }
+</style>
+<h2>Link Details</h2>
+    <table>
+        <thead>
+            <tr>
+                <td>URL</td>
+                <td>Status Code</td>
+                <td>Is Valid</td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in link %}
+            <tr>
+                <td>{{i.url}}</td>
+                <td>{{i.status_code}}</td>
+                <td>{{i.is_valid}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock content %} 

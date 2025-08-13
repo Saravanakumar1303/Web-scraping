@@ -1,0 +1,45 @@
+{% extends 'dashboard.html' %}
+{% block content %}
+<style>
+table,th,td{
+            border: 2px solid black;
+            border-collapse: collapse;
+        }
+    th,td{
+            padding: 3px;
+        }
+</style> 
+<h2>Create a Job</h2>
+<form method="POST">
+        {% csrf_token%}
+        <input type="url" name="url" id="url" placeholder="Enter url">
+
+        <select name="status" id="status">
+            {% for i in choices %}
+            <option value="{{i.0}}">{{i.1}}</option>
+            {% endfor %}
+        </select>
+        <input type="submit" placeholder="submit">
+</form>
+    <h2>Job Details</h2>
+    <table>
+        <thead>
+            <tr>
+                <td>URL</td>
+                <td>Username</td>
+                <td>Priority</td>
+                <td>Status</td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in jobs %}
+            <tr>
+                <td>{{i.url}}</td>
+                <td>{{i.user__username}}</td>
+                <td>{{i.priority}}</td>
+                <td>{{i.status}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock content %}
