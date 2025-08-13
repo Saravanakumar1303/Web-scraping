@@ -128,6 +128,9 @@ class create_job(View):
         return render(request, 'jobs.html', {'jobs': jobs, 'choices': choices.job_status_choices})
 
 class Subscription(View):
+    """
+    This is subscription view
+    """
     def get(self,request):
         Sub = user_subscription.objects.all().values('id','user__first_name','subscription')
         return render(request,'subscription.html',{'subscription_table':Sub,'choices':choices.user_subscription_choices})
