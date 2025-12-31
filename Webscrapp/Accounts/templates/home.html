@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Page</title>
+    <title>Home page</title>
     <style>
         body {
             margin: 0;
-        }
+    }
 
     .nav-bar {
         display: flex;
@@ -42,7 +42,6 @@
     .nav-right a{
         text-decoration: none;
     }
-
     .nav-right div:hover {
         background-color: white;
     }
@@ -51,7 +50,56 @@
         margin: 0 15px;
         font-weight: bold;
     }
-    
+     /* ===== HERO SECTION ===== */
+        .hero{
+            background-color: #ffffff;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .hero h1{
+            font-size: 36px;
+            color: #333;
+        }
+
+        .hero p{
+            font-size: 18px;
+            color: #666;
+            max-width: 750px;
+            margin: 20px auto;
+            line-height: 1.6;
+        }
+
+        /* ===== CONTENT SECTION ===== */
+        .content{
+            padding: 50px 80px;
+        }
+
+        .cards{
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .card{
+            background-color: #fff;
+            width: 300px;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .card h3{
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .card p{
+            color: #666;
+            font-size: 15px;
+            line-height: 1.5;
+        }
         /* ===== FOOTER ===== */
         footer{
             background-color: #333;
@@ -84,7 +132,7 @@
 
             {% if user.is_authenticated %}
                 <div><a href="{% url 'subs' %}">Subscription</a></div>
-                <div><a href="">View Subscription</a></div>
+                <div><a href="{% url 'view_subs' %}">View Subscription</a></div>
                 <div><a href="{% url 'create_job' %}">Job</a></div>
                 <div><a href="{% url 'links' %}">Links</a></div>
                 <p class="user-email">{{ request.user.first_name }}</p>
@@ -96,7 +144,43 @@
         </div>
     </div>
     </header>
-    
+    <section class="hero">
+    <h1>Web Scraping Automation Platform</h1>
+    <p>
+        Webscrap helps you automatically collect, monitor, and analyze data from
+        websites such as job portals, e-commerce platforms, and news sites using
+        Python-based web scraping and automation.
+    </p>
+    </section> 
+    <section class="content">
+    <div class="cards">
+
+        <div class="card">
+            <h3>🔍 Automated Data Extraction</h3>
+            <p>
+                Extract structured data from multiple websites using tools like
+                BeautifulSoup and Selenium.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>⏱ Scheduled Jobs</h3>
+            <p>
+                Automate scraping tasks using Celery and Cron to keep your data
+                up-to-date.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>📊 Data Storage</h3>
+            <p>
+                Store scraped data securely in databases and use it for reports,
+                alerts, and analytics.
+            </p>
+        </div>
+
+    </div>
+</section>
     <section>
     {% block content %}
     {% endblock %}

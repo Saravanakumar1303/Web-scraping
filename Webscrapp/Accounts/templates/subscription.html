@@ -1,40 +1,103 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h2>View Subscription</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>User :</th>
-                <th>Subscription :</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for sub in subscription_table %}
-           <tr>
-            <td>{{sub.user__first_name}}</td>
-            <td>{{sub.subscription}}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    <h2>user Subscription</h2>
-    <form method="POST">
-        {% csrf_token %}
-        <label for="">Username :</label>
-        <input type="text" name="user" id="user" value="{{request.user.email}}"><br>
-        <label for="">Subscription :</label>
-        <select name="subscription" id="subscription">
-            {% for key,value in choices %}
-            <option value="{{key}}">{{value}}</option>
-            {% endfor %}
-        </select><br>
-        <input type="submit" value="Create Subscription">
-    </form>
-</body>
-</html>
+{% extends 'dashboard.html' %}
+{% block content %}
+<style>
+    /* ================= SUBSCRIPTION PAGE ================= */
+
+.subscription-container {
+    min-height: 70vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fdf6ee;
+}
+
+.subscription-card {
+    background-color: antiquewhite;
+    padding: 30px 40px;
+    width: 380px;
+    border-radius: 12px;
+    box-shadow: 3px 3px 10px rgba(139, 69, 19, 0.3);
+}
+
+.subscription-card h2 {
+    text-align: center;
+    color: saddlebrown;
+    margin-bottom: 20px;
+}
+
+.subscription-card .form-group {
+    margin-bottom: 15px;
+}
+
+.subscription-card label {
+    display: block;
+    margin-bottom: 6px;
+    color: #5a3b1e;
+    font-weight: bold;
+}
+
+.subscription-card select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #caa472;
+    outline: none;
+}
+.subscription-card input{
+    width: 95%;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #caa472;
+    outline: none;
+}
+.subscription-card input:focus,
+.subscription-card select:focus {
+    border-color: saddlebrown;
+}
+
+.subscription-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: burlywood;
+    border: none;
+    border-radius: 6px;
+    color: saddlebrown;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.subscription-btn:hover {
+    background-color: #deb887;
+}
+
+.success-msg {
+    margin-top: 15px;
+    text-align: center;
+    color: green;
+    font-weight: bold;
+}
+</style>
+<div class="subscription-container">
+    <div class="subscription-card">
+        
+        <h2>User Subscription</h2> 
+        <form method="POST"> 
+            {% csrf_token %} 
+            <label for="">Username :</label> 
+            <input type="text" name="user" id="user" value="{{request.user.email}}"><br> 
+            <label>Subscription :</label>
+            <select name="subscription" id="subscription">
+                {% for key, value in choices %}
+                <option value="{{ key }}">{{ value }}</option>
+                {% endfor %}
+            </select>
+            <br> 
+            <br>
+                <input type="submit" value="Create Subscription"> 
+            </form>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,17 +1,111 @@
 {% extends 'dashboard.html' %}
 {% block content %}
-<div class="register_main">
-    <h2>Login</h2>
-    <form method="POST">
-        {% csrf_token %}
-        <label>Username :</label>
-        <input type="text" id="username" name="username" placeholder="email"><br>
-        <label>Password :</label>
-        <input type="text" id="pasword" name="password" placeholder="password"><br>
-        <input type="submit" value="Login">
-    </form>
-    <!-- <button><a href="{% url 'register' %}">Register</a></button> -->
+<style>
+    /* ================= LOGIN PAGE ================= */
 
+.login-container {
+    min-height: 70vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fdf6ee;
+}
+
+.login-card {
+    background-color: antiquewhite;
+    padding: 30px 40px;
+    width: 350px;
+    border-radius: 12px;
+    box-shadow: 3px 3px 10px rgba(139, 69, 19, 0.3);
+}
+
+.login-card h2 {
+    text-align: center;
+    color: saddlebrown;
+    margin-bottom: 20px;
+}
+
+.login-card .form-group {
+    margin-bottom: 15px;
+}
+
+.login-card .form-group label {
+    display: block;
+    margin-bottom: 6px;
+    color: #5a3b1e;
+    font-weight: bold;
+}
+
+.login-card .form-group input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #caa472;
+    outline: none;
+}
+
+.login-card .form-group input:focus {
+    border-color: saddlebrown;
+}
+
+.login-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: burlywood;
+    border: none;
+    border-radius: 6px;
+    color: saddlebrown;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.login-btn:hover {
+    background-color: #deb887;
+}
+
+.register-link {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.register-link a {
+    color: saddlebrown;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.register-link a:hover {
+    text-decoration: underline;
+}
+
+</style>
+<div class="login-container">
+    <div class="login-card">
+        <h2>Login</h2>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label>Username</label>
+                <input type="text" name="username" placeholder="Enter your email" required>
+            </div>
+
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" name="password" placeholder="Enter your password" required>
+            </div>
+
+            <input type="submit" value="Login" class="login-btn">
+        </form>
+
+        <p class="register-link">
+            Don't have an account? 
+            <a href="{% url 'register' %}">Register</a>
+        </p>
+    </div>
 </div>
 <script>
     if("{{messages}}")
