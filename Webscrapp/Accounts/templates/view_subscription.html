@@ -1,0 +1,87 @@
+{% extends 'dashboard.html' %}
+{% block content %}
+<style>
+    /* ================= VIEW SUBSCRIPTION PAGE ================= */
+
+.subscription-container {
+    min-height: 70vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fdf6ee;
+    padding: 20px;
+}
+
+.subscription-card {
+    background-color: antiquewhite;
+    padding: 30px 40px;
+    width: 500px;
+    border-radius: 12px;
+    box-shadow: 3px 3px 12px rgba(139, 69, 19, 0.3);
+}
+
+.subscription-card h2 {
+    text-align: center;
+    color: saddlebrown;
+    margin-bottom: 20px;
+}
+
+.subscription-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.subscription-table th,
+.subscription-table td {
+    border: 1px solid #caa472;
+    padding: 10px;
+    text-align: left;
+}
+
+.subscription-table th {
+    background-color: burlywood;
+    color: saddlebrown;
+    font-weight: bold;
+}
+
+.subscription-table tr:nth-child(even) {
+    background-color: #f5e3d0;
+}
+
+.no-subscription {
+    text-align: center;
+    font-weight: bold;
+    color: #5a3b1e;
+}
+h2{
+    color:saddlebrown;
+}
+</style>
+<div class ="subscription-container">
+    <div class="subscription-card">
+        <h2>View Subscription</h2>
+        {% if subscription_table %}
+        <table class="subscription-table">
+            <thead>
+                <tr>
+                    <th>User :</th>
+                    <th>Subscription :</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% csrf_token %}
+                {% for sub in subscription_table %}
+            <tr>
+                <td>{{sub.user__first_name}}</td>
+                <td>{{sub.subscription}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p class="no-subscription">No subscriptions found.</p>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock%}

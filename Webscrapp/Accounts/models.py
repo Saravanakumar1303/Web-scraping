@@ -12,7 +12,7 @@ class job(models.Model):
     url = models.CharField(max_length=255, null=True, blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     priority =models.IntegerField(null=True, blank=True)
-    status = models.CharField(max_length=255, null=True, blank=True,choices=choices.job_status_choices)
+    status = models.CharField(max_length=255, null=True, blank=True,choices=choices.job_status_choices,default='new')
 
 class JobQueue(models.Model):
     job = models.ForeignKey(job,on_delete=models.CASCADE)

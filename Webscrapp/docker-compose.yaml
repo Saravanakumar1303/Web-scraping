@@ -40,7 +40,7 @@ services:
     container_name: scrap_api
     command: python manage.py runserver 0.0.0:8000
     ports:
-      - "8003:8000"
+      - "8001:8000"
   
   scrap_links:  
     extends:
@@ -48,7 +48,7 @@ services:
     container_name: scrap_links
     command: python -u manage.py runscript run
 
-  pgadmin: #postgresql UI
+  pgadmin: #postgresql UIs
     image: dpage/pgadmin4:8.14
     container_name: scrap_pg
     init: true

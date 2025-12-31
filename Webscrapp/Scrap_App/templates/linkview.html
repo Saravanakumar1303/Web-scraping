@@ -1,31 +1,120 @@
 {% extends 'dashboard.html' %}
 {% block content %}
+
 <style>
-table,th,td{
-            border: 2px solid black;
-            border-collapse: collapse;
-        }
-    th,td{
-            padding: 3px;
-        }
+/* Page wrapper */
+.link-container {
+    padding: 20px;
+    background-color: #f9fafb;
+    min-height: 100vh;
+}
+
+/* Page title */
+.link-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+    font-weight: 600;
+}
+
+/* Table wrapper */
+.table-wrapper {
+    overflow-x: auto;
+    background: #ffffff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+/* Table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 15px;
+}
+
+/* Header */
+thead {
+    background-color: #0be064;
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+th, td {
+    padding: 12px 15px;
+    text-align: center;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+/* URL column */
+td:first-child {
+    text-align: left;
+    word-break: break-all;
+}
+
+/* Row hover */
+tbody tr:hover {
+    background-color: #f1f5f9;
+}
+
+/* Status badges */
+.status-valid {
+    color: #15803d;
+    font-weight: 600;
+}
+
+.status-invalid {
+    color: #b91c1c;
+    font-weight: 600;
+}
+
+/* Status code */
+.status-code {
+    font-weight: 500;
+}
+
+/* Responsive text */
+@media (max-width: 768px) {
+    table {
+        font-size: 14px;
+    }
+}
 </style>
-<h2>Link Details</h2>
-    <table>
-        <thead>
-            <tr>
-                <td>URL</td>
-                <td>Status Code</td>
-                <td>Is Valid</td>
-            </tr>
-        </thead>
-        <tbody>
-            {% for i in link %}
-            <tr>
-                <td>{{i.url}}</td>
-                <td>{{i.status_code}}</td>
-                <td>{{i.is_valid}}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-{% endblock content %} 
+
+<div class="link-container">
+    <h2>Link Details</h2>
+
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>URL</th>
+                    <th>Status Code</th>
+                    <th>Validity</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in link %}
+                <tr>
+                    <td>{{ i.url }}</td>
+                    <td class="status-code">{{ i.status_code }}</td>
+                    <td>
+                        {% if i.is_valid %}
+                            <span class="status-valid">Valid</span>
+                        {% else %}
+                            <span class="status-invalid">Invalid</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="3">No links found</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock content %}

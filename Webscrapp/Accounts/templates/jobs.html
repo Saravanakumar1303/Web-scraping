@@ -1,45 +1,111 @@
 {% extends 'dashboard.html' %}
 {% block content %}
-<style>
-table,th,td{
-            border: 2px solid black;
-            border-collapse: collapse;
-        }
-    th,td{
-            padding: 3px;
-        }
-</style> 
-<h2>Create a Job</h2>
-<form method="POST">
-        {% csrf_token%}
-        <input type="url" name="url" id="url" placeholder="Enter url">
 
-        <select name="status" id="status">
-            {% for i in choices %}
-            <option value="{{i.0}}">{{i.1}}</option>
-            {% endfor %}
-        </select>
-        <input type="submit" placeholder="submit">
-</form>
-    <h2>Job Details</h2>
-    <table>
-        <thead>
-            <tr>
-                <td>URL</td>
-                <td>Username</td>
-                <td>Priority</td>
-                <td>Status</td>
-            </tr>
-        </thead>
-        <tbody>
-            {% for i in jobs %}
-            <tr>
-                <td>{{i.url}}</td>
-                <td>{{i.user__username}}</td>
-                <td>{{i.priority}}</td>
-                <td>{{i.status}}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+<style>
+/* ===== Page Container ===== */
+.job-container {
+    min-height: 70vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fdf6ee;
+    padding: 30px;
+}
+
+/* ===== Card ===== */
+.job-card {
+    background-color: antiquewhite;
+    width: 600px;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 3px 3px 10px rgba(139, 69, 19, 0.3);
+    margin-bottom: 30px;
+}
+
+/* ===== Headings ===== */
+.job-card h2 {
+    text-align: center;
+    color: saddlebrown;
+    margin-bottom: 20px;
+}
+
+/* ===== Form ===== */
+.job-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.job-form input,
+.job-form select {
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid burlywood;
+    font-size: 14px;
+}
+
+.job-form input:focus,
+.job-form select:focus {
+    outline: none;
+    border-color: saddlebrown;
+}
+
+/* ===== Submit Button ===== */
+.job-form input[type="submit"] {
+    background-color: saddlebrown;
+    color: white;
+    cursor: pointer;
+    border: none;
+    font-weight: bold;
+}
+
+.job-form input[type="submit"]:hover {
+    background-color: #5a3b1e;
+}
+
+/* ===== Table ===== */
+.job-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.job-table th,
+.job-table td {
+    border: 1px solid burlywood;
+    padding: 12px;
+    text-align: center;
+}
+
+.job-table th {
+    background-color: burlywood;
+    color: saddlebrown;
+    font-weight: bold;
+}
+
+.job-table tr:nth-child(even) {
+    background-color: #f3dec7;
+}
+</style>
+
+<div class="job-container">
+
+    <!-- Create Job -->
+    <div class="job-card">
+        <h2>Create a Job</h2>
+        <form method="POST" class="job-form" action="{% url 'create_job' %}">
+            {% csrf_token %}
+            <input type="url" name="url" id="url" placeholder="Enter URL" required>
+
+            <select name="status" id="status">
+                {% for value,label in choices %}
+                <option value="{{ value }}">{{ label }}</option>
+                {% endfor %}
+            </select>
+
+            <input type="submit" value="Create Job">
+        </form>
+    </div>
+
+</div>
+
 {% endblock content %}

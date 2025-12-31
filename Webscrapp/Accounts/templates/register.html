@@ -1,17 +1,115 @@
 {% extends 'dashboard.html' %}
 {% block content %}
-<div class="register_main">
-    <h2>Register</h2>
-    <form method="POST">
-        {% csrf_token %}
-        <label for="">First Name :</label>
-        <input type="text" name="fname" id="fname"><br>
-        <label for="">Email :</label>
-        <input type="text" id="email" name="email" placeholder="email"><br>
-        <label for="">Password :</label>
-        <input type="text" id="pasword" name="password" placeholder="password"><br>
-        <input type="submit" value="Register">
-    </form>
-    <!-- <button><a href="{% url 'login' %}">Login</a></button> -->
+<style>
+    /* ================= REGISTER PAGE ================= */
+
+.register-container {
+    min-height: 70vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fdf6ee;
+}
+
+.register-card {
+    background-color: antiquewhite;
+    padding: 30px 40px;
+    width: 350px;
+    border-radius: 12px;
+    box-shadow: 3px 3px 10px rgba(139, 69, 19, 0.3);
+}
+
+.register-card h2 {
+    text-align: center;
+    color: saddlebrown;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 6px;
+    color: #5a3b1e;
+    font-weight: bold;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #caa472;
+    outline: none;
+}
+
+.form-group input:focus {
+    border-color: saddlebrown;
+}
+
+.register-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: burlywood;
+    border: none;
+    border-radius: 6px;
+    color: saddlebrown;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.register-btn:hover {
+    background-color: #deb887;
+}
+
+.login-link {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.login-link a {
+    color: saddlebrown;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.login-link a:hover {
+    text-decoration: underline;
+}
+
+</style>
+<div class="register-container">
+    <div class="register-card">
+        <h2>Register</h2>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label>First Name</label>
+                <input type="text" name="fname" placeholder="Enter your first name" required>
+            </div>
+
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" name="email" placeholder="Enter your email" required>
+            </div>
+
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" name="password" placeholder="Enter your password" required>
+            </div>
+
+            <input type="submit" value="Register" class="register-btn">
+        </form>
+
+        <p class="login-link">
+            Already have an account?
+            <a href="{% url 'login' %}">Login</a>
+        </p>
+    </div>
 </div>
 {% endblock %}
