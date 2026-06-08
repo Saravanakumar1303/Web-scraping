@@ -1,12 +1,8 @@
 WebScrapp – Django Web Scraping Job Queue System
 📌 Project Overview
-  WebScrapp is a Django-based web scraping job management system that allows users to submit URLs for scraping.
-  The system manages scraping tasks using a priority-based job queue and executes them asynchronously through background scripts.
-  Users can register, log in, create scraping jobs, and view extracted links once the scraping process is completed.
-  The application is containerized using Docker and PostgreSQL, making it scalable and production-ready.
+WebScrapp is a Django-based web scraping job management system that allows users to submit URLs for scraping. The system manages scraping tasks using a priority-based job queue and executes them asynchronously through background scripts. Users can register, log in, create scraping jobs, and view extracted links once the scraping process is completed.The application is containerized using Docker and PostgreSQL, making it scalable and production-ready.
 
 🚀 Key Features
-
 1. User Authentication
   (i). User registration with email validation
   (ii). Password validation with strong regex rules
